@@ -30,7 +30,7 @@ public class TradeProcessor
 {
     private readonly IDataReader dataReader;
     private readonly ITradeRecordProcessor tradeRecordProcessor;
-    private readonly IDatabaseManager dbManager;
+    private readonly dbManager dbManager;
 
     public TradeProcessor(IDataReader dataReader, ITradeRecordProcessor tradeRecordProcessor, IDatabaseManager dbManager)
     {
