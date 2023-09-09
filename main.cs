@@ -30,13 +30,13 @@ public class TradeProcessor
 {
     private readonly IDataReader dataReader;
     private readonly ITradeRecordProcessor tradeRecordProcessor;
-    private readonly IDatabaseManager databaseManager;
+    private readonly IDatabaseManager dbManager;
 
-    public TradeProcessor(IDataReader dataReader, ITradeRecordProcessor tradeRecordProcessor, IDatabaseManager databaseManager)
+    public TradeProcessor(IDataReader dataReader, ITradeRecordProcessor tradeRecordProcessor, IDatabaseManager dbManager)
     {
         this.dataReader = dataReader;
         this.tradeRecordProcessor = tradeRecordProcessor;
-        this.databaseManager = databaseManager;
+        this.dbManager = dbManager;
     }
 
     public void ProcessTrades(System.IO.Stream stream)
@@ -53,7 +53,7 @@ public class TradeProcessor
             }
         }
 
-        databaseManager.InsertTrades(tradesList);
+        dbManager.InsertTrades(tradesList);
 
         Console.WriteLine("INFO: {0} trades processed", tradesList.Count);
     }
@@ -136,4 +136,12 @@ public class dbManager{
                 connection.Close();
         }
     }
+}
+
+public class TradeRecord
+{
+    public string SourceCurrency { get; set; }
+    public string DestinationCurrency { get; set; }
+    public float Lots { get; set; }
+    public decimal Price { get; set; }
 }
